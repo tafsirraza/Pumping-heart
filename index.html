@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Pumping Human Heart</title>
+    <style>
+        /* General page styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a1a;
+        }
+
+        .heart-container {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #heart-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .heart {
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25%, 75% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .heart-active {
+            animation: heartbeat 1s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container">
+        <!-- Heart SVG with embedded gradient -->
+        <svg id="heart-svg" viewBox="0 0 100 100">
+            <defs>
+                <!-- Define the gradient -->
+                <linearGradient id="gradient" gradientTransform="rotate(90)">
+                    <stop offset="0%" stop-color="#d62828"/>
+                    <stop offset="100%" stop-color="#e63946"/>
+                </linearGradient>
+            </defs>
+            <!-- Use the gradient in the heart shape -->
+            <path id="heart-path" class="heart" d="M50 30 C20 20, 20 60, 50 80 C80 60, 80 20, 50 30 Z" fill="url(#gradient)" stroke="#d62828" stroke-width="2"></path>
+        </svg>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heart = document.querySelector('.heart');
+
+            const startPumping = () => {
+                heart.classList.add('heart-active');
+            };
+
+            const stopPumping = () => {
+                heart.classList.remove('heart-active');
+            };
+
+            heart.addEventListener('mouseenter', startPumping);
+            heart.addEventListener('mouseleave', stopPumping);
+
+            startPumping(); // Start the pumping animation immediately
+        });
+    </script>
+</body>
+</html>
